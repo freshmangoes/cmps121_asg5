@@ -29,10 +29,25 @@ var app = function() {
     };
 
     self.ondeviceready = function () {
-        // This callback is called once Cordova has finished its own initialization.
+        // This callback is called once Cordova has finished
+        // its own initialization.
         console.log("The device is ready");
-        $("#vue-div").show();
+        $("#vue-div").show(); // This is jQuery.
         self.is_configured = true;
+    };
+
+    self.reset = function () {
+        self.vue.board = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0];
+    };
+
+    self.shuffle = function(i, j) {
+        // You need to implement this.
+        console.log("Shuffle:" + i + ", " + j);
+    };
+
+    self.scramble = function() {
+        // Read the Wikipedia article.  If you just randomize,
+        // the resulting puzzle may not be solvable.
     };
 
     self.vue = new Vue({
@@ -40,11 +55,17 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
+            board: []
         },
         methods: {
+            reset: self.reset,
+            shuffle: self.shuffle,
+            scramble: self.scramble
         }
 
     });
+
+    self.reset();
 
     return self;
 };

@@ -46,8 +46,21 @@
 
     <div id="vue-div" class="app" style="display:none">
 
-        <h1>Hello class!</h1>
-        <p>It seems that this minimal app is working.</p>
+        <div class="container chessboard">
+            <table>
+                <tr v-for="i in [0, 1, 2, 3]">
+                    <td v-for="j in [0, 1, 2, 3]" v-on:click="shuffle(i,j)"
+                        v-bind:class="{red: 4*i+j<8, black: 4*i+j == 15}" class="center">
+                        (${i}, ${j}): ${board[4*i + j]}
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="container center resetbutton">
+            <button v-on:click="reset">Reset</button>
+            <button v-on:click="scramble">Scramble</button>
+        </div>
 
     </div>
     <script type="text/javascript" src="cordova.js"></script>
