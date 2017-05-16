@@ -42,41 +42,44 @@ var app = function() {
 
     self.shuffle = function(i, j) {
         // You need to implement this.
-
-        // Just to make checking look nicer
         var north = -4;
         var east = 1;
         var south = 4;
         var west = -1;
 
         self.vue.arrayIndex = (4*i)+j;
-        console.log("Array Index: " + self.vue.arrayIndex);
         self.vue.arrayIndexVal = self.vue.board[self.vue.arrayIndex];
+
+        console.log("Array Index: " + self.vue.arrayIndex);
         console.log("Array Index Val: " + self.vue.arrayIndexVal);
 
         var index = self.vue.arrayIndex;
         var val = self.vue.arrayIndexVal;
         var board = self.vue.board;
 
-        //remember to make it actually swap instead of just overwriting lmao
+        // Handling swaps of the tiles
+        // If 0 is north of the tile
         if(board[index + north] == 0) {
           var temp = board[index];
           console.log("INDEX: " + index);
           console.log("TEMP: " + temp);
           Vue.set(board, index, board[index+north]);
           Vue.set(board, index + north, temp);
+        // If 0 is south of the tile
         }else if(board[index + south] == 0){
           var temp = board[index];
           console.log("INDEX: " + index);
           console.log("TEMP: " + temp);
           Vue.set(board, index, board[index + south]);
           Vue.set(board, index + south, temp);
+        // If 0 is east of the tile
         }else if(board[index + east] == 0){
           var temp = board[index];
           console.log("INDEX: " + index);
           console.log("TEMP: " + temp);
           Vue.set(board, index, board[index + east]);
           Vue.set(board, index + east, temp);
+        // If 0 is west of the tile
         }else if(board[index + west] == 0){
           temp = board[index];
           console.log("INDEX: " + index);
