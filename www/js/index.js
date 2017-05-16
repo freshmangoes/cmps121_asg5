@@ -47,14 +47,14 @@ var app = function() {
         var south = 4;
         var west = -1;
 
-        self.vue.arrayIndex = (4*i)+j;
-        self.vue.arrayIndexVal = self.vue.board[self.vue.arrayIndex];
+        self.vue.array_ind = (4*i)+j;
+        self.vue.array_item = self.vue.board[self.vue.array_ind];
 
-        console.log("Array Index: " + self.vue.arrayIndex);
-        console.log("Array Index Val: " + self.vue.arrayIndexVal);
+        console.log("Array Index: " + self.vue.array_ind);
+        console.log("Array Index Val: " + self.vue.array_item);
 
-        var index = self.vue.arrayIndex;
-        var val = self.vue.arrayIndexVal;
+        var index = self.vue.array_ind;
+        var val = self.vue.array_item;
         var board = self.vue.board;
 
         // Handling swaps of the tiles
@@ -87,12 +87,24 @@ var app = function() {
           Vue.set(board, index, board[index + west]);
           Vue.set(board, index + west, temp);
         }
-
     };
 
     self.scramble = function() {
         // Read the Wikipedia article.  If you just randomize,
         // the resulting puzzle may not be solvable.
+        var array = self.vue.board;
+        var curr_i = array.length - 1;
+        console.log("Array Length: " + array.length);
+        console.log("INDEX TO START SHUFFLE: " + curr_i);
+
+        while (0 != curr_i){
+          random_i = Math.floor(Math.random()*curr_i);
+          curr_i -= 1;
+
+          temp = array[curr_i];
+          Vue.set(array, curr_i, array[random_i]);
+          Vue.set(array, random_i, temp);
+        }
     };
 
     self.vue = new Vue({
@@ -101,8 +113,8 @@ var app = function() {
         unsafeDelimiters: ['!{', '}'],
         data: {
             board: [],
-            arrayIndex: 0,
-            arrayIndexVal: 0,
+            array_ind: 0,
+            array_item: 0,
         },
         methods: {
             reset: self.reset,
